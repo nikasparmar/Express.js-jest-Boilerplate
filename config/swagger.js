@@ -1,3 +1,5 @@
+import path from 'path';
+
 var swaggerOptions = {
     swaggerDefinition: {
         info: {
@@ -21,8 +23,8 @@ var swaggerOptions = {
             }
         }
     },
-    basedir: __dirname, //app absolute path
+    basedir:  path.resolve(), //app absolute path
     files: ['../routes/**/*.js'] //Path to the API handle folder
 };
 
-module.exports = swaggerOptions;
+export default swaggerOptions;

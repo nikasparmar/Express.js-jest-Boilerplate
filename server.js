@@ -1,13 +1,13 @@
-const app = require("./app");
-const cluster = require('cluster');
-const numCPUs = require('os').cpus().length;
+import app from './app.js';
+import cluster from 'cluster';
+import numCPUs from 'os';
 
 if (cluster.isMaster) {
 
     console.log(`Master ${process.pid} is running`);
 
     // Fork workers.
-    for (let i = 0; i < numCPUs; i++) {
+    for (let i = 0; i < numCPUs.cpus().length; i++) {
         cluster.fork();
     }
 

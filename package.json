@@ -6,6 +6,7 @@
     "start": "node server.js",
     "test": "npx jest"
   },
+  "type": "module",
   "main": "server.js",
   "dependencies": {
     "cookie-parser": "^1.4.4",
@@ -21,7 +22,9 @@
     "node": "10.16.3"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.8.7",
     "babel-cli": "^6.26.0",
+    "babel-jest": "^25.1.0",
     "babel-preset-env": "^1.7.0",
     "express-swagger-generator": "^1.1.17",
     "jest": "^25.1.0",

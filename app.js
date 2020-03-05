@@ -1,20 +1,21 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-const swaggerOptions = require('./config/swagger');
+import express from 'express';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import swaggerOptions from './config/swagger.js';
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+import indexRouter from './routes/index.js';
+import usersRouter from './routes/users.js';
 
 var app = express();
 
-const expressSwagger = require('express-swagger-generator')(app);
-const morganBody = require('morgan-body');
-const cors = require('cors')
-const helmet = require('helmet')
-const multer = require('multer')
-const storage = multer.diskStorage({
+import expressSwagger from 'express-swagger-generator';
+import morganBody from 'morgan-body';
+import cors from 'cors'
+import helmet from 'helmet'
+import multer from 'multer'
+
+const storage =multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, '/tmp/')
     },
@@ -28,7 +29,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join( path.resolve(), 'public')));
 app.use(cors())
 app.use(helmet())
 
@@ -39,8 +40,7 @@ app.use(multer({
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-expressSwagger(swaggerOptions)
+expressSwagger(app)(swaggerOptions)
 morganBody(app);
 
-// export default app;
-module.exports = app;
+export default app;
